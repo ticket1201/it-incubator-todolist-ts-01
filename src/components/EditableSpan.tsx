@@ -1,32 +1,39 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 type EditableSpanPropsType = {
     title: string
-    callback: (newTitle: string) => void
+    callback: (title: string) => void
 }
 
-const EditableSpan = (props: EditableSpanPropsType) => {
-    const [edit, setEdit] = useState(false)
+const EditableSpan = (props:EditableSpanPropsType) => {
+    const [isActive, setIsActive] = useState(false)
     const [newTitle, setNewTitle] = useState(props.title)
 
-    const changeEditableSpanHandler = () => {
-        setEdit(!edit)
-        addTask()
+    const changeIsActiveStatus = () => {
+        setIsActive(!isActive)
     }
 
     const addTask = () => {
+        if (newTitle !== "") {
             props.callback(newTitle);
+        }
+        changeIsActiveStatus()
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
 
-    return (
-        edit
-            ? <input onBlur={changeEditableSpanHandler} onChange={onChangeHandler} value={newTitle} autoFocus/>
-            : <span onDoubleClick={changeEditableSpanHandler}>{props.title}</span>
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.charCode === 13) {
+            addTask();
+        }
+    }
 
+    return (
+        isActive
+            ? <input type="text" autoFocus onBlur={addTask} onChange={onChangeHandler} onKeyPress={onKeyPressHandler} value={newTitle}/>
+            : <span onDoubleClick={changeIsActiveStatus}>{props.title}</span>
     );
 };
 

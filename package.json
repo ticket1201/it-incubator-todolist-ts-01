@@ -1,8 +1,8 @@
 {
-  "name": "samurai-way",
+  "name": "todolist",
   "version": "0.1.0",
   "private": true,
-  "homepage": "",
+  "homepage": "https://ticket1201.github.io/it-incubator-todolist-ts-01/",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",

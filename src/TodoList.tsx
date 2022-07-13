@@ -45,7 +45,7 @@ export function Todolist(props: PropsType) {
         <h3><EditableSpan value={props.title} onChange={changeTodolistTitle}/>
             <IconButton aria-label="delete"
                         onClick={removeTodolist}>
-                <Delete />
+                <Delete/>
             </IconButton>
 
         </h3>
@@ -64,7 +64,7 @@ export function Todolist(props: PropsType) {
 
 
                     return <li key={t.id} className={t.isDone ? 'is-done' : ''}>
-                        <Checkbox  onChange={onChangeHandler} checked={t.isDone} size={'small'}/>
+                        <Checkbox onChange={onChangeHandler} checked={t.isDone} size={'small'}/>
                         {/*<input type="checkbox" onChange={onChangeHandler} checked={t.isDone}/>*/}
                         <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
                         <IconButton aria-label="delete" onClick={onClickHandler} color={'primary'}>
@@ -76,9 +76,12 @@ export function Todolist(props: PropsType) {
         </ul>
         <div>
 
-            <Button variant={props.filter === 'all' ? "outlined" : "contained"} color="secondary" size={'small'} onClick={onAllClickHandler}>All</Button>
-            <Button variant={props.filter === 'active' ? "outlined" : "contained"}  color="success" size={'small'} onClick={onActiveClickHandler}>Active</Button>
-            <Button variant={props.filter === 'completed' ? "outlined" : "contained"}  color="error" size={'small'} onClick={onCompletedClickHandler}>Completed</Button>
+            <Button variant={props.filter === 'all' ? 'contained' : 'outlined'} color="secondary" size={'small'}
+                    onClick={onAllClickHandler}>All</Button>
+            <Button variant={props.filter === 'active' ? 'contained' : 'outlined'} color="success" size={'small'}
+                    onClick={onActiveClickHandler}>Active</Button>
+            <Button variant={props.filter === 'completed' ? 'contained' : 'outlined'} color="error" size={'small'}
+                    onClick={onCompletedClickHandler}>Completed</Button>
         </div>
     </div>
 }

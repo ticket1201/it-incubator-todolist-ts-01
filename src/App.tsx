@@ -47,16 +47,17 @@ function App() {
     });
 
     function addTodolist(title: string) {
-        let newTodolistId = v1();
-        dispatchTasks(addTaskAC('New task', newTodolistId))
-        dispatchTodolists(addTodolistAC(newTodolistId, title))
+        let action = addTodolistAC(title)
+        dispatchTasks(action)
+        dispatchTodolists(action)
     }
+
     function removeTodolist(id: string) {
-        dispatchTodolists(removeTodolistAC(id))
-        delete tasks[id]; // удаляем св-во из объекта... значением которого являлся массив тасок
-        // засетаем в стейт копию объекта, чтобы React отреагировал перерисовкой
-       // setTasks({...tasks});
+        let action = removeTodolistAC(id)
+        dispatchTodolists(action)
+        dispatchTasks(action)
     }
+
     function changeTodolistTitle(id: string, title: string) {
         dispatchTodolists(changeTodolistTitleAC(id, title))
     }
@@ -97,7 +98,7 @@ function App() {
                                 tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
                             }
 
-                            return <Grid item lg={1}>
+                            return <Grid item lg={1} key={tl.id}>
                                 <Paper style={{padding: '10px'}}>
                                     <Todolist
                                         key={tl.id}

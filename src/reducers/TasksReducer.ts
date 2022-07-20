@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
 import {TasksStateType} from '../App';
-
+import {addTodolistACType, removeTodolistACType} from './TodolistReducer'
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
 type addTaskACType = ReturnType<typeof addTaskAC>
@@ -19,12 +19,7 @@ export const TasksReducer = (state: TasksStateType, action: tsarACType): TasksSt
         }
         case 'ADD-TASK': {
             let newTask = {id: v1(), title: action.payload.title, isDone: false};
-            if(state[action.payload.todolistId]){
-                return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
-            }
-            else {
-                return {...state, [action.payload.todolistId]: []}
-            }
+            return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
         }
         case 'CHANGE-TASK-TITLE': {
             return {

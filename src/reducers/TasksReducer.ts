@@ -7,9 +7,9 @@ type addTaskACType = ReturnType<typeof addTaskAC>
 type changeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
 type changeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
 
-type tsarACType = removeTaskACType | addTaskACType | changeTaskTitleACType | changeTaskStatusACType;
+type tsarACType = removeTaskACType | addTaskACType | changeTaskTitleACType | changeTaskStatusACType | addTodolistACType | removeTodolistACType;
 
-export const TasksReducer = (state: TasksStateType, action: tsarACType) => {
+export const TasksReducer = (state: TasksStateType, action: tsarACType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK': {
             return {
@@ -40,6 +40,14 @@ export const TasksReducer = (state: TasksStateType, action: tsarACType) => {
                 [action.payload.todolistId]:state[action.payload.todolistId].map(el => el.id === action.payload.id ? {
                     ...el, isDone: action.payload.isDone} : el)
             }
+        }
+
+        case 'ADD-TODOLIST': {
+            return {...state, [action.payload.newTodolistId]: []}
+        }
+        case 'REMOVE-TODOLIST':{
+            delete state[action.payload.id]
+            return {...state}
         }
         default:
             return state;

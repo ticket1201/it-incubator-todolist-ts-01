@@ -6,14 +6,14 @@ import {AddItemForm} from './AddItemForm';
 import {TaskType, Todolist} from './TodoList';
 import ButtonAppBar from './components/ButtonAppBar';
 import {Container, Grid, Paper} from '@mui/material';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, TasksReducer} from './reducers/TasksReducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './reducers/tasksReducer';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
-    TodolistReducer
-} from './reducers/TodolistReducer';
+    todolistReducer
+} from './reducers/todolistReducer';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 export type TodolistType = {
@@ -31,11 +31,11 @@ function App() {
     let todolistId1 = v1();
     let todolistId2 = v1();
 
-    let [todolists, dispatchTodolists] = useReducer(TodolistReducer,[
+    let [todolists, dispatchTodolists] = useReducer(todolistReducer,[
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'}
     ])
-    let [tasks, dispatchTasks] = useReducer(TasksReducer,{
+    let [tasks, dispatchTasks] = useReducer(tasksReducer,{
         [todolistId1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true}

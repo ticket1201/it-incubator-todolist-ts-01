@@ -1,19 +1,20 @@
-import React, {useReducer} from 'react';
-import './App.css';
 
+import React/*, {useReducer}*/ from 'react';
+import './App.css';
+/*
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 import {TaskType, Todolist} from './TodoList';
 import ButtonAppBar from './components/ButtonAppBar';
 import {Container, Grid, Paper} from '@mui/material';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './reducers/tasksReducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './state/tasksReducer';
 import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
     todolistReducer
-} from './reducers/todolistReducer';
+} from './state/todolistReducer';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 export type TodolistType = {
@@ -25,10 +26,11 @@ export type TodolistType = {
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
+*/
 
 
-function App() {
-    let todolistId1 = v1();
+function AppWithReducer() {
+    /*let todolistId1 = v1();
     let todolistId2 = v1();
 
     let [todolists, dispatchTodolists] = useReducer(todolistReducer,[
@@ -122,7 +124,8 @@ function App() {
                 </Grid>
             </Container>
         </div>
-    );
+    );*/
 }
 
-export default App;
+export default AppWithReducer;
+

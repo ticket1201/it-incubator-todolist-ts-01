@@ -28,14 +28,14 @@ function App() {
         <div className="App">
             <ButtonAppBar/>
             <Container fixed>
-                <Grid container style={{padding: '20px'}}>
+                <Grid container style={{margin: '30px'}}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
-                <Grid container spacing={5} columns={3}>
+                <Grid container spacing={5} columns={3} justifyContent={'space-evenly'}>
                     {
                         todoLists.map(tl => {
                             return <Grid item lg={1} key={tl.id}>
-                                <Paper style={{padding: '10px'}}>
+                                <Paper style={{padding: '20px', borderRadius: '10px'}} elevation={5}>
                                     <Todolist
                                         todolist={tl}
                                     />

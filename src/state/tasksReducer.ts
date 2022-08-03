@@ -1,6 +1,5 @@
 import {v1} from 'uuid';
 import {addTodolistACType, removeTodolistACType} from './todolistReducer';
-import {TaskType} from '../TodoList';
 
 
 type removeTaskACType = ReturnType<typeof removeTaskAC>
@@ -15,6 +14,13 @@ type tsarACType =
     | changeTaskStatusACType
     | addTodolistACType
     | removeTodolistACType;
+
+export type TaskType = {
+    id: string
+    title: string
+    isDone: boolean
+}
+
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>

@@ -1,4 +1,3 @@
-import {FilterValuesType} from '../AppWithRedux';
 import {v1} from 'uuid';
 
 export type addTodolistACType = ReturnType<typeof addTodolistAC>
@@ -7,6 +6,9 @@ type changeTodolistTitleACType = ReturnType<typeof changeTodolistTitleAC>
 type changeTodolistFilterACType = ReturnType<typeof changeTodolistFilterAC>
 
 type summaryACType = removeTodolistACType | changeTodolistTitleACType | changeTodolistFilterACType | addTodolistACType
+
+
+export type FilterValuesType = 'all' | 'active' | 'completed';
 
 export type TodolistType = {
     id: string

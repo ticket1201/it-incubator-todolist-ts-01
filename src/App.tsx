@@ -4,12 +4,10 @@ import './App.css';
 import {AddItemForm} from './components/AddItemForm/AddItemForm';
 import {Todolist} from './components/TodoList/TodoList';
 import ButtonAppBar from './components/ButtonAppBar/ButtonAppBar';
-import {Container, Grid, Paper} from '@mui/material';
+import {Container, Grid} from '@mui/material';
 import {addTodolistAC, TodolistType} from './state/todolistReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
-
-
 
 
 function App() {
@@ -21,7 +19,7 @@ function App() {
     const addTodolist = useCallback((title: string) => {
         let action = addTodolistAC(title)
         dispatch(action)
-    },[dispatch])
+    }, [dispatch])
 
 
     return (
@@ -35,11 +33,9 @@ function App() {
                     {
                         todoLists.map(tl => {
                             return <Grid item lg={1} key={tl.id}>
-                                <Paper style={{padding: '20px', borderRadius: '10px'}} elevation={5}>
-                                    <Todolist
-                                        todolist={tl}
-                                    />
-                                </Paper>
+                                <Todolist
+                                    todolist={tl}
+                                />
                             </Grid>
                         })
                     }

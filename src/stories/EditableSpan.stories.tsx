@@ -1,6 +1,6 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {EditableSpan} from './EditableSpan';
+import {EditableSpan} from '../components/EditableSpan/EditableSpan';
 
 export default {
     title: 'TODOLIST/EditableSpan',
@@ -10,7 +10,7 @@ export default {
             description: 'new value'
         },
         value:{
-            defaultValue: 'some text here',
+            defaultValue: 'some text, click on me',
             description: 'Start value'
         }
     },

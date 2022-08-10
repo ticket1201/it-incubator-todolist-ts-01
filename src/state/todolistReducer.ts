@@ -16,13 +16,7 @@ export type TodolistType = {
     filter: FilterValuesType
 }
 
-const initialState:Array<TodolistType> = [
-    {
-        id:'todolist1',
-        title: 'What to learn',
-        filter: 'all'
-    }
-]
+const initialState:Array<TodolistType> = []
 
 export const todolistReducer = (state=initialState, action: summaryACType): Array<TodolistType> => {
     switch (action.type) {

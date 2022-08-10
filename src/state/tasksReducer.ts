@@ -27,23 +27,6 @@ export type TasksStateType = {
 }
 
 const initialState: TasksStateType = {
-    ['todolist1']: [
-        {
-            id: '1',
-            title: 'HTML',
-            isDone: true,
-        },
-        {
-            id: '2',
-            title: 'CSS',
-            isDone: true,
-        },
-        {
-            id: '3',
-            title: 'JS',
-            isDone: false,
-        }
-    ]
 }
 
 export const tasksReducer = (state = initialState, action: tsarACType): TasksStateType => {

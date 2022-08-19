@@ -19,7 +19,23 @@ export type GetTasksResponseType<T = []> = {
     error: string | null
 }
 
-export type TaskItemType = {
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3
+}
+
+export enum StatusPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4
+
+}
+
+export type TaskType = {
     addedDate: string
     deadline: string
     description: string
@@ -27,7 +43,7 @@ export type TaskItemType = {
     order: number
     priority: number
     startDate: string
-    status: number
+    status: TaskStatuses
     title: string
     todoListId: string
 }
@@ -61,14 +77,14 @@ export const todolistAPI = {
 }
 export const tasksAPI = {
     getTasks(todolistID: string) {
-        return instance.get<GetTasksResponseType<TaskItemType>>(`todo-lists/${todolistID}/tasks`)
+        return instance.get<GetTasksResponseType<TaskType>>(`todo-lists/${todolistID}/tasks`)
     },
     createTask(todolistID: string, title: string) {
-        return instance.post<ResponseType<{ item: TaskItemType }>>(`todo-lists/${todolistID}/tasks`,
+        return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks`,
             {title})
     },
     updateTask(todolistID: string, taskID: string, newTitle: string) {
-        return instance.put<ResponseType<{ item: TaskItemType }>>(`todo-lists/${todolistID}/tasks/${taskID}`,
+        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks/${taskID}`,
             {
                 title: newTitle,
                 description: 'none',

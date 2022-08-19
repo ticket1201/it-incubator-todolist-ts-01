@@ -7,16 +7,17 @@ import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
-    TodolistType
+    TodolistDomainType,
 } from '../../state/todolistReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../state/store';
-import {addTaskAC, TaskType} from '../../state/tasksReducer';
+import {addTaskAC} from '../../state/tasksReducer';
 import {Task} from '../Task/Task';
+import {TaskStatuses, TaskType} from '../../api/todolist-api';
 
 
 type PropsType = {
-    todolist: TodolistType
+    todolist: TodolistDomainType
 }
 
 export const Todolist = memo(({todolist}: PropsType) => {
@@ -44,10 +45,10 @@ export const Todolist = memo(({todolist}: PropsType) => {
 
 
     if (filter === 'active') {
-        tasks = tasks.filter(t => !t.isDone);
+        tasks = tasks.filter(t => t.status === TaskStatuses.New );
     }
     if (filter === 'completed') {
-        tasks = tasks.filter(t => t.isDone);
+        tasks = tasks.filter(t => t.status === TaskStatuses.Completed);
     }
 
 

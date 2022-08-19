@@ -4,7 +4,7 @@ import {Task} from '../components/Task/Task';
 import ReduxStoreProviderDecorator from '../state/ReduxStoreProviderDecorator';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../state/store';
-import {TaskType} from '../state/tasksReducer';
+import {TaskType} from '../api/todolist-api';
 
 export default {
     title: 'TODOLIST/Task',

@@ -1,6 +1,6 @@
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, tasksReducer, TasksStateType} from './tasksReducer';
 import {addTodolistAC, removeTodolistAC} from './todolistReducer';
-import {StatusPriorities, TaskStatuses} from '../api/todolist-api';
+import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
 
 let startState: TasksStateType
 
@@ -12,7 +12,7 @@ beforeEach(() => {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -23,7 +23,7 @@ beforeEach(() => {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -34,7 +34,7 @@ beforeEach(() => {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -47,7 +47,7 @@ beforeEach(() => {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -58,7 +58,7 @@ beforeEach(() => {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -69,7 +69,7 @@ beforeEach(() => {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,

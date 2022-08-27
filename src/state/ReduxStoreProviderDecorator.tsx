@@ -5,7 +5,7 @@ import {combineReducers, createStore} from 'redux';
 import {tasksReducer} from './tasksReducer';
 import {todolistReducer} from './todolistReducer';
 import {v1} from 'uuid';
-import {StatusPriorities, TaskStatuses} from '../api/todolist-api';
+import {TaskPriorities, TaskStatuses} from '../api/todolist-api';
 
 
 const rootReducer = combineReducers({
@@ -25,7 +25,7 @@ const initialGlobalState: AppRootStateType = {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -36,7 +36,7 @@ const initialGlobalState: AppRootStateType = {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -49,7 +49,7 @@ const initialGlobalState: AppRootStateType = {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,
@@ -60,7 +60,7 @@ const initialGlobalState: AppRootStateType = {
                 status: TaskStatuses.New,
                 deadline: '',
                 description: '',
-                priority: StatusPriorities.Low,
+                priority: TaskPriorities.Low,
                 startDate: '',
                 addedDate: '',
                 order: 0,

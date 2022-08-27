@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios, {AxiosResponse} from 'axios'
+import {modeTaskType} from '../state/tasksReducer';
 
 export type TodolistType = {
     id: string
@@ -26,7 +27,7 @@ export enum TaskStatuses {
     Draft = 3
 }
 
-export enum StatusPriorities {
+export enum TaskPriorities {
     Low = 0,
     Middle = 1,
     Hi = 2,
@@ -83,17 +84,8 @@ export const tasksAPI = {
         return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks`,
             {title})
     },
-    updateTask(todolistID: string, taskID: string, newTitle: string) {
-        return instance.put<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks/${taskID}`,
-            {
-                title: newTitle,
-                description: 'none',
-                completed: false,
-                status: 0,
-                priority: 1,
-                startDate: new Date('19.08.2022'),
-                deadline: new Date('19.09.2022'),
-            })
+    updateTask(todolistId: string, taskId: string, model: modeTaskType) {
+        return instance.put<modeTaskType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     },
     deleteTask(todolistID: string, taskID: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)

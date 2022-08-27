@@ -150,11 +150,11 @@ export const CreateTask = () => {
 export const UpdateTask = () => {
     const [todolistID, setTodolistID] = useState('f1fb5db1-415f-496e-879b-72999109c30d')
     const [taskID, setTaskID] = useState('')
-    const [newTitle, setNewTitle] = useState('')
+    const [title, setTitle] = useState('')
     const [state, setState] = useState<any>(null)
 
     const onclickHandler = () => {
-        tasksAPI.updateTask(todolistID, taskID, newTitle)
+        tasksAPI.updateTask(todolistID, taskID, {title})
             .then(res => {
                 setState(res.data.data.item)
             })
@@ -176,7 +176,7 @@ export const UpdateTask = () => {
             </label>
             <label>
                 New Title
-                <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.currentTarget.value)}/>
+                <input type="text" value={title} onChange={(e) => setTitle(e.currentTarget.value)}/>
             </label>
             <button onClick={onclickHandler}>Send</button>
         </div>

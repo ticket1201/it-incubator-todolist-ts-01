@@ -1,17 +1,16 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import {AddItemForm} from '../AddItemForm/AddItemForm';
 import {EditableSpan} from '../EditableSpan/EditableSpan';
 import {Button, IconButton, Paper} from '@mui/material';
 import {Delete} from '@material-ui/icons';
 import {
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    removeTodolistAC,
+    changeTodolistTitleTC, deleteTodolistTC,
     TodolistDomainType,
 } from '../../state/todolistReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from '../../state/store';
-import {addTaskAC} from '../../state/tasksReducer';
+import {creteTasksTC, setTasksTC} from '../../state/tasksReducer';
 import {Task} from '../Task/Task';
 import {TaskStatuses, TaskType} from '../../api/todolist-api';
 
@@ -29,14 +28,14 @@ export const Todolist = memo(({todolist}: PropsType) => {
     const dispatch = useDispatch()
 
     const addTask = (title: string) => {
-        dispatch((addTaskAC(title, id)));
+        dispatch((creteTasksTC(id, title)));
     }
 
     const removeTodolist = () => {
-        dispatch(removeTodolistAC(id));
+        dispatch(deleteTodolistTC(id));
     }
     const changeTodolistTitle = useCallback((title: string) => {
-        dispatch(changeTodolistTitleAC(id, title));
+        dispatch(changeTodolistTitleTC(id, title));
     }, [dispatch, id])
 
     const onAllClickHandler = () => dispatch(changeTodolistFilterAC('all', id));
@@ -45,11 +44,15 @@ export const Todolist = memo(({todolist}: PropsType) => {
 
 
     if (filter === 'active') {
-        tasks = tasks.filter(t => t.status === TaskStatuses.New );
+        tasks = tasks.filter(t => t.status === TaskStatuses.New);
     }
     if (filter === 'completed') {
         tasks = tasks.filter(t => t.status === TaskStatuses.Completed);
     }
+
+    useEffect(() => {
+        dispatch(setTasksTC(id))
+    }, [id, dispatch])
 
 
     return (

@@ -1,10 +1,10 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import ReduxStoreProviderDecorator from '../state/ReduxStoreProviderDecorator';
+import ReduxStoreProviderDecorator from './decorators/ReduxStoreProviderDecorator';
 import {useSelector} from 'react-redux';
-import {AppRootStateType} from '../state/store';
-import {Todolist} from '../components/TodoList/TodoList';
-import {TodolistDomainType} from '../state/todolistReducer';
+import {AppRootStateType} from '../app/store';
+import {Todolist} from '../features/Todolists/Todolist/TodoList';
+import {TodolistDomainType} from '../features/Todolists/todolistReducer';
 
 export default {
     title: 'TODOLIST/TodoList',

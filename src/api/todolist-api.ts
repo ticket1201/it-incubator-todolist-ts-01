@@ -1,53 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
-import {modeTaskType} from '../state/tasksReducer';
+import {modeTaskType} from '../features/Todolists/tasksReducer';
 
-export type TodolistType = {
-    id: string
-    title: string
-    addedDate: string
-    order: number
-}
-type ResponseType<T = object> = {
-    data: T
-    fieldsErrors: Array<string>
-    messages: Array<string>
-    resultCode: number
-}
-
-export type GetTasksResponseType<T = []> = {
-    items: T[]
-    totalCount: number
-    error: string | null
-}
-
-export enum TaskStatuses {
-    New = 0,
-    InProgress = 1,
-    Completed = 2,
-    Draft = 3
-}
-
-export enum TaskPriorities {
-    Low = 0,
-    Middle = 1,
-    Hi = 2,
-    Urgently = 3,
-    Later = 4
-
-}
-
-export type TaskType = {
-    addedDate: string
-    deadline: string
-    description: string
-    id: string
-    order: number
-    priority: number
-    startDate: string
-    status: TaskStatuses
-    title: string
-    todoListId: string
-}
+//AXIOS INSTANCE
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -57,6 +11,7 @@ const instance = axios.create({
     },
 })
 
+//API
 
 export const todolistAPI = {
     getTodolists() {
@@ -92,3 +47,49 @@ export const tasksAPI = {
     }
 }
 
+
+//TYPES
+
+export type TodolistType = {
+    id: string
+    title: string
+    addedDate: string
+    order: number
+}
+type ResponseType<T = object> = {
+    data: T
+    fieldsErrors: Array<string>
+    messages: Array<string>
+    resultCode: number
+}
+export type GetTasksResponseType<T = []> = {
+    items: T[]
+    totalCount: number
+    error: string | null
+}
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3
+}
+export enum TaskPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4
+
+}
+export type TaskType = {
+    addedDate: string
+    deadline: string
+    description: string
+    id: string
+    order: number
+    priority: number
+    startDate: string
+    status: TaskStatuses
+    title: string
+    todoListId: string
+}

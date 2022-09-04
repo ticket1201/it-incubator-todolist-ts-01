@@ -1,18 +1,20 @@
 import React, {memo, useCallback, useEffect} from 'react';
-import {AddItemForm} from '../../../components/AddItemForm/AddItemForm';
-import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
-import {Button, IconButton, Paper} from '@mui/material';
-import {Delete} from '@material-ui/icons';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootStateType} from '../../../app/store';
+import {TaskStatuses} from '../../../api/todolist-api';
+import {creteTasksTC, fetchTasksTC, TaskDomainType} from '../tasksReducer';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleTC, deleteTodolistTC,
     TodolistDomainType,
 } from '../todolistReducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../app/store';
-import {creteTasksTC, setTasksTC} from '../tasksReducer';
 import {Task} from './Task/Task';
-import {TaskStatuses, TaskType} from '../../../api/todolist-api';
+import {AddItemForm} from '../../../components/AddItemForm/AddItemForm';
+import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import Delete from '@material-ui/icons/Delete';
 
 
 type PropsType = {
@@ -21,9 +23,11 @@ type PropsType = {
 
 export const Todolist = memo(({todolist}: PropsType) => {
 
-    const {title, id, filter} = todolist
+    const {title, id, filter, entityStatus} = todolist
 
-    let tasks = useSelector<AppRootStateType, TaskType[]>(state => state.tasks[id])
+    let tasks = useSelector<AppRootStateType, TaskDomainType[]>(state => state.tasks[id])
+
+    const tasksPlaceHolder = `No tasks here...`
 
     const dispatch = useDispatch()
 
@@ -51,33 +55,36 @@ export const Todolist = memo(({todolist}: PropsType) => {
     }
 
     useEffect(() => {
-        dispatch(setTasksTC(id))
+        dispatch(fetchTasksTC(id))
     }, [id, dispatch])
 
 
     return (
         <Paper style={{padding: '20px', borderRadius: '10px', maxWidth: '275px'}} elevation={5}>
-            <h3><EditableSpan value={title} onChange={changeTodolistTitle}/>
+            <h3>
+                <EditableSpan value={title} onChange={changeTodolistTitle} disabled={entityStatus === 'loading'}/>
                 <IconButton aria-label="delete"
-                            onClick={removeTodolist}>
+                            onClick={removeTodolist}
+                            disabled={entityStatus === 'loading'}
+                >
                     <Delete/>
                 </IconButton>
-
             </h3>
-            <AddItemForm addItem={addTask}/>
-            <ul>
-                {
-                    tasks.map(t => {
+            <AddItemForm addItem={addTask} label={'New task'} disabled={entityStatus === 'loading'}/>
+            <ol>
+                {tasks.length
+                    ? tasks.map(t => {
                         return <Task key={t.id} task={t} todolistID={id}/>
                     })
+                    : <span>{tasksPlaceHolder}</span>
                 }
-            </ul>
+            </ol>
             <div>
-                <Button variant={filter === 'all' ? 'contained' : 'text'} color="secondary" size={'small'}
+                <Button variant={filter === 'all' ? 'contained' : 'text'}  size={'small'}
                         onClick={onAllClickHandler} style={{margin: '0 5px'}}>All</Button>
                 <Button variant={filter === 'active' ? 'contained' : 'text'} color="success" size={'small'}
                         onClick={onActiveClickHandler} style={{margin: '0 5px'}}>Active</Button>
-                <Button variant={filter === 'completed' ? 'contained' : 'text'} color="error" size={'small'}
+                <Button variant={filter === 'completed' ? 'contained' : 'text'} color="secondary" size={'small'}
                         onClick={onCompletedClickHandler} style={{margin: '0 5px'}}>Completed</Button>
             </div>
         </Paper>)

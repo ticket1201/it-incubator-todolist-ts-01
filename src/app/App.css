@@ -3,8 +3,29 @@
 }
 
 
+.task{
+  align-items: start;
+}
 
 
 .is-done {
   opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+ol{
+  list-style-type: decimal;
+  padding-inline-start: 0;
+  word-break: break-all;
+}
+
+ol span{
+  margin: 5px 0;
+
+}
+
+li{
+  color: #1976d2;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
 }

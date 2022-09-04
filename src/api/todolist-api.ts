@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
-import {modeTaskType} from '../features/Todolists/tasksReducer';
+import {modelTaskType} from '../features/Todolists/tasksReducer';
 
 //AXIOS INSTANCE
 
@@ -39,8 +39,8 @@ export const tasksAPI = {
         return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks`,
             {title})
     },
-    updateTask(todolistId: string, taskId: string, model: modeTaskType) {
-        return instance.put<modeTaskType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
+    updateTask(todolistId: string, taskId: string, model: modelTaskType) {
+        return instance.put<modelTaskType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     },
     deleteTask(todolistID: string, taskID: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)
@@ -56,7 +56,7 @@ export type TodolistType = {
     addedDate: string
     order: number
 }
-type ResponseType<T = object> = {
+export type ResponseType<T = object> = {
     data: T
     fieldsErrors: Array<string>
     messages: Array<string>

@@ -1,29 +1,25 @@
-import React, {useCallback} from 'react';
+import React from 'react';
+import {useAppSelector} from './store';
 import './App.css';
-import {AddItemForm} from '../components/AddItemForm/AddItemForm';
 import ButtonAppBar from '../components/ButtonAppBar/ButtonAppBar';
-import {Container, Grid} from '@mui/material';
-import {addTodolistsTC} from '../features/Todolists/todolistReducer';
-import {useDispatch} from 'react-redux';
 import Todolists from '../features/Todolists/Todolists';
+import Container from '@mui/material/Container';
+import LinearProgress from '@mui/material/LinearProgress';
+import {CustomizedSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 
 
 function App() {
-    const dispatch = useDispatch()
-
-    const addTodolist = useCallback((title: string) => {
-        dispatch(addTodolistsTC(title))
-    }, [dispatch])
+    const status = useAppSelector( state => state.app.status)
 
     return (
         <div className="App">
             <ButtonAppBar/>
+            <CustomizedSnackbar/>
+            {status === 'loading' &&  <LinearProgress color="secondary"/>}
             <Container fixed>
-                <Grid container style={{margin: '30px'}}>
-                    <AddItemForm addItem={addTodolist}/>
-                </Grid>
                 <Todolists/>
             </Container>
+
         </div>
     );
 }

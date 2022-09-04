@@ -16,7 +16,8 @@ beforeEach(() => {
                 startDate: '',
                 addedDate: '',
                 order: 0,
-                todoListId: 'todolistId1'
+                todoListId: 'todolistId1',
+                isTaskChanging: false
             },
             {
                 id: '2', title: 'JS',
@@ -27,7 +28,8 @@ beforeEach(() => {
                 startDate: '',
                 addedDate: '',
                 order: 0,
-                todoListId: 'todolistId1'
+                todoListId: 'todolistId1',
+                isTaskChanging: false
             },
             {
                 id: '3', title: 'React',
@@ -38,7 +40,8 @@ beforeEach(() => {
                 startDate: '',
                 addedDate: '',
                 order: 0,
-                todoListId: 'todolistId1'
+                todoListId: 'todolistId1',
+                isTaskChanging: false
             }
         ],
         'todolistId2': [
@@ -51,7 +54,8 @@ beforeEach(() => {
                 startDate: '',
                 addedDate: '',
                 order: 0,
-                todoListId: 'todolistId2'
+                todoListId: 'todolistId2',
+                isTaskChanging: false
             },
             {
                 id: '2', title: 'milk',
@@ -62,7 +66,8 @@ beforeEach(() => {
                 startDate: '',
                 addedDate: '',
                 order: 0,
-                todoListId: 'todolistId2'
+                todoListId: 'todolistId2',
+                isTaskChanging: false
             },
             {
                 id: '3', title: 'tea',
@@ -73,7 +78,8 @@ beforeEach(() => {
                 startDate: '',
                 addedDate: '',
                 order: 0,
-                todoListId: 'todolistId2'
+                todoListId: 'todolistId2',
+                isTaskChanging: false
             }
         ]
     };

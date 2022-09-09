@@ -1,9 +1,14 @@
 import { Dispatch } from 'redux';
-import {appActionsType, setAppErrorAC, setAppStatusAC} from '../../app/app-reducer';
+import {
+    setAppErrorAC,
+    SetAppErrorActionType,
+    setAppStatusAC,
+    SetAppStatusActionType
+} from '../../app/app-reducer';
 import {ResponseType} from '../../api/todolist-api';
 
 // generic function
-export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatch<appActionsType>) => {
+export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>) => {
     if (data.messages.length) {
         dispatch(setAppErrorAC(data.messages[0]))
     } else {
@@ -12,7 +17,7 @@ export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatc
     dispatch(setAppStatusAC('failed'))
 }
 
-export const handleServerNetworkError = (error: {message: string}, dispatch: Dispatch<appActionsType>) => {
+export const handleServerNetworkError = (error: {message: string}, dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>) => {
     dispatch(setAppErrorAC(error.message))
     dispatch(setAppStatusAC('failed'))
 }

@@ -3,24 +3,22 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import {useAppSelector} from '../../app/store';
+import {useDispatch} from 'react-redux';
+import {logoutTC} from '../../features/Login/authReducer';
 
 export default function ButtonAppBar() {
+    let dispatch = useDispatch()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const logoutHandler = () => {
+        dispatch(logoutTC())
+    }
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
-                <Toolbar sx={{ justifyContent: `space-between` }}>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Button color="inherit">Login</Button>
+                <Toolbar sx={{ justifyContent: `flex-end` }}>
+                    {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
                 </Toolbar>
             </AppBar>
         </Box>

@@ -19,12 +19,17 @@ const rootReducer = combineReducers({
 const initialGlobalState: AppRootStateType = {
     app: {
         status: 'idle' as RequestStatusType,
+        isInitialized: true,
         error: null as null | string
     },
     todolists: [
         {id: 'todolistId1', title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus: 'idle'},
         {id: 'todolistId2', title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus: 'idle'}
     ],
+    auth: {
+        isLoggedIn: true
+    }
+    ,
     tasks: {
         ['todolistId1']: [
             {

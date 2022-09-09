@@ -5,11 +5,14 @@ import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
 import {store} from './app/store';
+import {HashRouter} from 'react-router-dom';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App/>
-    </Provider>,
+    <HashRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </HashRouter>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

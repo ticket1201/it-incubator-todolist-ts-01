@@ -1,11 +1,12 @@
 import React, {memo, useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from '../../../app/store';
+import {useDispatch} from 'react-redux';
+import {useAppSelector} from '../../../app/store';
 import {TaskStatuses} from '../../../api/todolist-api';
-import {creteTasksTC, fetchTasksTC, TaskDomainType} from '../tasksReducer';
+import {creteTasksTC, fetchTasksTC} from '../tasksReducer';
 import {
     changeTodolistFilterAC,
-    changeTodolistTitleTC, deleteTodolistTC,
+    changeTodolistTitleTC,
+    deleteTodolistTC,
     TodolistDomainType,
 } from '../todolistReducer';
 import {Task} from './Task/Task';
@@ -25,7 +26,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
 
     const {title, id, filter, entityStatus} = todolist
 
-    let tasks = useSelector<AppRootStateType, TaskDomainType[]>(state => state.tasks[id])
+    let tasks = useAppSelector(state => state.tasks[id])
 
     const tasksPlaceHolder = `No tasks here...`
 

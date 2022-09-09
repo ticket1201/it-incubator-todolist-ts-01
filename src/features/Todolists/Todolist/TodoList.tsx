@@ -60,7 +60,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
 
 
     return (
-        <Paper style={{padding: '20px', borderRadius: '10px', maxWidth: '275px'}} elevation={5}>
+        <Paper elevation={5} className={'Paper'} style={{ borderRadius:'10px'}}>
             <h3>
                 <EditableSpan value={title} onChange={changeTodolistTitle} disabled={entityStatus === 'loading'}/>
                 <IconButton aria-label="delete"

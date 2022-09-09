@@ -15,14 +15,11 @@ type TaskPropsType = {
 
 export const Task = memo(({task, todolistID}: TaskPropsType) => {
     const dispatch = useDispatch()
-
     const onClickHandler = () => dispatch(deleteTaskTC(todolistID, task.id))
-
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New;
         dispatch(updateTaskTC(todolistID, task.id, {status}));
     }
-
     const onTitleChangeHandler = (title: string) => {
         dispatch(updateTaskTC(todolistID, task.id, {title}));
     }

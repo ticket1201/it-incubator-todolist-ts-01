@@ -41,7 +41,7 @@ export const AddItemForm = memo((props: AddItemFormPropsType) => {
         }
     }
 
-    return <div>
+    return <div className={'addItemInput'}>
         <TextField value={title}
                    variant={'outlined'}
                    size={'small'}

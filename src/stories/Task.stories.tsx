@@ -3,7 +3,7 @@ import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {Task} from '../features/Todolists/Todolist/Task/Task';
 import ReduxStoreProviderDecorator from './decorators/ReduxStoreProviderDecorator';
 import {useSelector} from 'react-redux';
-import {AppRootStateType} from '../app/store';
+import {RootStateType} from '../app/store';
 import {TaskDomainType} from '../features/Todolists/tasksReducer';
 
 export default {
@@ -14,7 +14,7 @@ export default {
 
 
 const TaskWithRedux = () => {
-    const task = useSelector<AppRootStateType, TaskDomainType>(state => state.tasks['todolistId1'][0])
+    const task = useSelector<RootStateType, TaskDomainType>(state => state.tasks['todolistId1'][0])
     return(
         <Task task={task} todolistID={'todolistId1'}/>
     )

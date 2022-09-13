@@ -2,7 +2,7 @@ import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 import ReduxStoreProviderDecorator from './decorators/ReduxStoreProviderDecorator';
 import {useSelector} from 'react-redux';
-import {AppRootStateType} from '../app/store';
+import {RootStateType} from '../app/store';
 import {Todolist} from '../features/Todolists/Todolist/TodoList';
 import {TodolistDomainType} from '../features/Todolists/todolistReducer';
 
@@ -14,7 +14,7 @@ export default {
 
 
 const TodolistWithRedux = () => {
-    const todoListState = useSelector<AppRootStateType, TodolistDomainType>(state => state.todolists[0])
+    const todoListState = useSelector<RootStateType, TodolistDomainType>(state => state.todolists[0])
     return(
         <Todolist todolist={todoListState}/>
     )

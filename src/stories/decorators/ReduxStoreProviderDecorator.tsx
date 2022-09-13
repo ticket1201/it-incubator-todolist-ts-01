@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {AppRootStateType} from '../../app/store';
+import {RootStateType} from '../../app/store';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {tasksReducer} from '../../features/Todolists/tasksReducer';
 import {todolistReducer} from '../../features/Todolists/todolistReducer';
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     app: appReducer
 })
 
-const initialGlobalState: AppRootStateType = {
+const initialGlobalState: RootStateType = {
     app: {
         status: 'idle' as RequestStatusType,
         isInitialized: true,

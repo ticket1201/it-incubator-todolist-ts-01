@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {useAppSelector} from './store';
 import './App.css';
 import ButtonAppBar from '../components/ButtonAppBar/ButtonAppBar';
 import Todolists from '../features/Todolists/Todolists';
@@ -10,11 +9,11 @@ import {CustomizedSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 import {initAppTC} from './app-reducer';
 import {Login} from '../features/Login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 
 
 function App() {
-    let dispatch = useDispatch()
+    let dispatch = useAppDispatch()
     const isInitialized = useAppSelector(state => state.app.isInitialized)
     const status = useAppSelector( state => state.app.status)
 

@@ -1,8 +1,6 @@
-import React, {memo, useCallback, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {useAppSelector} from '../../../app/store';
+import React, {memo, useCallback} from 'react';
 import {TaskStatuses} from '../../../api/todolist-api';
-import {creteTasksTC, fetchTasksTC} from '../tasksReducer';
+import {creteTasksTC} from '../tasksReducer';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleTC,
@@ -16,6 +14,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Delete from '@material-ui/icons/Delete';
+import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
 
 
 type PropsType = {
@@ -23,14 +22,12 @@ type PropsType = {
 }
 
 export const Todolist = memo(({todolist}: PropsType) => {
-
     const {title, id, filter, entityStatus} = todolist
 
     let tasks = useAppSelector(state => state.tasks[id])
+    const dispatch = useAppDispatch()
 
     const tasksPlaceHolder = `No tasks here...`
-
-    const dispatch = useDispatch()
 
     const addTask = (title: string) => {
         dispatch((creteTasksTC(id, title)));
@@ -54,10 +51,6 @@ export const Todolist = memo(({todolist}: PropsType) => {
     if (filter === 'completed') {
         tasks = tasks.filter(t => t.status === TaskStatuses.Completed);
     }
-
-    useEffect(() => {
-        dispatch(fetchTasksTC(id))
-    }, [id, dispatch])
 
 
     return (

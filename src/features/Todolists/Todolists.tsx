@@ -1,14 +1,13 @@
 import React, {useCallback, useEffect} from 'react';
 import Grid from '@mui/material/Grid';
 import {Todolist} from './Todolist/TodoList';
-import {useDispatch} from 'react-redux';
-import {useAppSelector} from '../../app/store';
-import {addTodolistsTC, fetchTodolistsT} from './todolistReducer';
+import {addTodolistsTC, fetchTodolistsTC} from './todolistReducer';
 import {AddItemForm} from '../../components/AddItemForm/AddItemForm';
 import {Navigate} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 
 const Todolists = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const todoLists = useAppSelector(state => state.todolists)
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const addTodolist = useCallback((title: string) => {
@@ -21,7 +20,7 @@ const Todolists = () => {
         if (!isLoggedIn) {
             return
         }
-        dispatch(fetchTodolistsT)
+        dispatch(fetchTodolistsTC())
     }, [dispatch, isLoggedIn])
 
 

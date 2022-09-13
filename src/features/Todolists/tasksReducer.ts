@@ -1,7 +1,12 @@
-import {addTodolistACType, removeTodolistACType, setTodolistsActionType} from './todolistReducer';
+  import {
+    addTodolistACType,
+    clearDataACType,
+    removeTodolistACType,
+    setTasksACType,
+    setTodolistsActionType
+} from './todolistReducer';
 import {TaskPriorities, tasksAPI, TaskStatuses, TaskType, TodolistType} from '../../api/todolist-api';
-import {Dispatch} from 'redux';
-import {AppRootStateType} from '../../app/store';
+import {RootStateType, RootThunkType} from '../../app/store';
 import {appActionsType, setAppStatusAC} from '../../app/app-reducer';
 import {handleServerAppError, handleServerNetworkError} from '../../components/utils/error-utils';
 
@@ -64,6 +69,8 @@ export const tasksReducer = (state = initialState, action: tasksACType): TasksSt
             delete state[action.payload.id]
             return {...state}
         }
+        case 'TODO/CLEAR-DATA':
+            return {}
         default:
             return state;
     }
@@ -93,7 +100,7 @@ export const updateTaskStatusAC = (taskId: string, todolistId: string, isTaskCha
 
 //THUNK
 
-export const fetchTasksTC = (todolistsId: string) => (dispatch: Dispatch<tasksACType>) => {
+export const fetchTasksTC = (todolistsId: string):RootThunkType => (dispatch) => {
     tasksAPI.getTasks(todolistsId)
         .then(res => {
             dispatch(setTasksAC(todolistsId, res.data.items))
@@ -103,7 +110,7 @@ export const fetchTasksTC = (todolistsId: string) => (dispatch: Dispatch<tasksAC
             handleServerNetworkError(e, dispatch)
         })
 }
-export const deleteTaskTC = (todolistId: string, taskId: string) => (dispatch: Dispatch<tasksACType>) => {
+export const deleteTaskTC = (todolistId: string, taskId: string):RootThunkType => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     dispatch(updateTaskStatusAC(taskId, todolistId, true))
     tasksAPI.deleteTask(todolistId, taskId)
@@ -120,7 +127,7 @@ export const deleteTaskTC = (todolistId: string, taskId: string) => (dispatch: D
             dispatch(updateTaskStatusAC(taskId, todolistId, false))
         })
 }
-export const creteTasksTC = (todolistsId: string, title: string) => (dispatch: Dispatch<tasksACType>) => {
+export const creteTasksTC = (todolistsId: string, title: string):RootThunkType => (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     tasksAPI.createTask(todolistsId, title)
         .then((res) => {
@@ -135,8 +142,8 @@ export const creteTasksTC = (todolistsId: string, title: string) => (dispatch: D
             handleServerNetworkError(e, dispatch)
         })
 }
-export const updateTaskTC = (todolistId: string, taskId: string, model: modelTaskType) =>
-    (dispatch: Dispatch<tasksACType>, getState: () => AppRootStateType) => {
+export const updateTaskTC = (todolistId: string, taskId: string, model: modelTaskType):RootThunkType =>
+    (dispatch, getState: () => RootStateType) => {
         dispatch(setAppStatusAC('loading'))
         dispatch(updateTaskStatusAC(taskId, todolistId, true))
         const task = getState().tasks[todolistId].find(t => t.id === taskId);
@@ -166,15 +173,16 @@ export const updateTaskTC = (todolistId: string, taskId: string, model: modelTas
 
 //TYPES
 
-type tasksACType =
+export type tasksACType =
     | setTodolistsActionType
     | addTodolistACType
     | removeTodolistACType
-    | ReturnType<typeof setTasksAC>
+    | setTasksACType
     | ReturnType<typeof removeTaskAC>
     | ReturnType<typeof addTaskAC>
     | ReturnType<typeof updateTaskAC>
     | ReturnType<typeof updateTaskStatusAC>
+    | clearDataACType
     | appActionsType
 
 export type TasksStateType = {

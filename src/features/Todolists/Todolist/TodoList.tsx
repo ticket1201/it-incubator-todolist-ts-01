@@ -40,9 +40,9 @@ export const Todolist = memo(({todolist}: PropsType) => {
         dispatch(changeTodolistTitleTC(id, title));
     }, [dispatch, id])
 
-    const onAllClickHandler = () => dispatch(changeTodolistFilterAC('all', id));
-    const onActiveClickHandler = () => dispatch(changeTodolistFilterAC('active', id));
-    const onCompletedClickHandler = () => dispatch(changeTodolistFilterAC('completed', id));
+    const onAllClickHandler = () => dispatch(changeTodolistFilterAC({value: 'all', todolistId: id}));
+    const onActiveClickHandler = () => dispatch(changeTodolistFilterAC({value: 'active', todolistId: id}));
+    const onCompletedClickHandler = () => dispatch(changeTodolistFilterAC({value: 'completed', todolistId: id}));
 
 
     if (filter === 'active') {
@@ -54,7 +54,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
 
 
     return (
-        <Paper elevation={5} className={'Paper'} style={{ borderRadius:'10px'}}>
+        <Paper elevation={5} className={'Paper'} style={{borderRadius: '10px'}}>
             <h3>
                 <EditableSpan value={title} onChange={changeTodolistTitle} disabled={entityStatus === 'loading'}/>
                 <IconButton aria-label="delete"
@@ -74,7 +74,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
                 }
             </ol>
             <div>
-                <Button variant={filter === 'all' ? 'contained' : 'text'}  size={'small'}
+                <Button variant={filter === 'all' ? 'contained' : 'text'} size={'small'}
                         onClick={onAllClickHandler} style={{margin: '0 5px'}}>All</Button>
                 <Button variant={filter === 'active' ? 'contained' : 'text'} color="success" size={'small'}
                         onClick={onActiveClickHandler} style={{margin: '0 5px'}}>Active</Button>

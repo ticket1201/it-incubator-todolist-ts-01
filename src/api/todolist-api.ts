@@ -83,7 +83,7 @@ export type ResponseType<T = object> = {
     data: T
     fieldsErrors: Array<string>
     messages: Array<string>
-    resultCode: number
+    resultCode: resultCodes
 }
 export type GetTasksResponseType<T = []> = {
     items: T[]
@@ -105,6 +105,12 @@ export type TaskType = {
 
 //enum
 
+export enum resultCodes{
+    success = 0,
+    error = 1,
+    captcha = 10
+}
+
 export enum TaskStatuses {
     New = 0,
     InProgress = 1,
@@ -117,5 +123,4 @@ export enum TaskPriorities {
     Hi = 2,
     Urgently = 3,
     Later = 4
-
 }

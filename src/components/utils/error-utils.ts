@@ -1,4 +1,4 @@
-import { Dispatch } from 'redux';
+import {Dispatch} from 'redux';
 import {
     setAppErrorAC,
     SetAppErrorActionType,
@@ -10,16 +10,16 @@ import {ResponseType} from '../../api/todolist-api';
 // generic function
 export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>) => {
     if (data.messages.length) {
-        dispatch(setAppErrorAC(data.messages[0]))
+        dispatch(setAppErrorAC({error: data.messages[0]}))
     } else {
-        dispatch(setAppErrorAC('Some error occurred'))
+        dispatch(setAppErrorAC({error: 'Some error occurred'}))
     }
-    dispatch(setAppStatusAC('failed'))
+    dispatch(setAppStatusAC({status: 'failed'}))
 }
 
-export const handleServerNetworkError = (error: {message: string}, dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>) => {
-    dispatch(setAppErrorAC(error.message))
-    dispatch(setAppStatusAC('failed'))
+export const handleServerNetworkError = (error: { message: string }, dispatch: Dispatch<SetAppErrorActionType | SetAppStatusActionType>) => {
+    dispatch(setAppErrorAC({error: error.message}))
+    dispatch(setAppStatusAC({status: 'failed'}))
 }
 
 

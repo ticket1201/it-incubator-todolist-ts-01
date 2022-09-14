@@ -29,7 +29,7 @@ export const Task = memo(({task, todolistID}: TaskPropsType) => {
         <li className={task.status === TaskStatuses.Completed ? `is-done task` : 'task'}>
             <Checkbox onChange={onChangeHandler} checked={task.status === TaskStatuses.Completed} size={'small'}/>
             <EditableSpan value={task.title} onChange={onTitleChangeHandler} disabled={task.isTaskChanging}/>
-            <IconButton aria-label="delete" onClick={onClickHandler} color={'primary'}>
+            <IconButton aria-label="delete" onClick={onClickHandler} color={'primary'} disabled={task.isTaskChanging}>
                 <HighlightOffIcon fontSize={'small'}/>
             </IconButton>
         </li>

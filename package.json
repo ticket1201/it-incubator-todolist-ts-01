@@ -43,6 +43,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "storybook": "start-storybook -p 9009 -s public",
+    "snapshot": "react-scripts test Storyshots.test.js",
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {

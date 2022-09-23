@@ -3,19 +3,19 @@ import path from 'path';
 import initStoryshots from '@storybook/addon-storyshots';
 
 // The required import from the @storybook/addon-storyshots-puppeteer addon
-import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
+import {imageSnapshot} from '@storybook/addon-storyshots-puppeteer';
 
 // Function to customize the snapshot location
-const getMatchOptions = ({ context: { fileName } }) => {
+const getMatchOptions = ({context: {fileName}}) => {
     // Generates a custom path based on the file name and the custom directory.
     const snapshotPath = path.join(path.dirname(fileName), '_snap_');
-    return { customSnapshotsDir: snapshotPath };
+    return {customSnapshotsDir: snapshotPath};
 };
 
 initStoryshots({
     // your own configuration
     test: imageSnapshot({
         // invoke the function above here
-        getMatchOptions,
+        getMatchOptions, storybookUrl: 'http://localhost:9009/'
     }),
 });

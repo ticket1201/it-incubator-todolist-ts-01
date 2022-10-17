@@ -1,5 +1,12 @@
-import {addTaskAC, modelTaskType, removeTaskAC, tasksReducer, TasksStateType, updateTaskAC} from './tasksReducer';
-import {addTodolistAC, removeTodolistAC} from './todolistReducer';
+import {
+    createTask,
+    deleteTask,
+    fetchTasks,
+    tasksReducer,
+    TasksStateType,
+    updateTaskAC
+} from './tasksReducer';
+import {addTodolistAC} from './todolistReducer';
 import {TaskPriorities, TaskStatuses} from '../../api/todolist-api';
 
 let startState: TasksStateType
@@ -85,27 +92,35 @@ beforeEach(() => {
     };
 })
 
+test('task should be added to todolist', () => {
+    const action = fetchTasks.fulfilled({tasks: startState['todolistId2'], todolistId: 'todolistId1'}, '', 'todolistId1');
+    const endState = tasksReducer(startState, action)
+    expect(endState['todolistId1'].length).toBe(3);
+    expect(endState['todolistId1'][1].title).toBe('milk');
+});
+
+
 test('correct task should be deleted', () => {
-    const action = removeTaskAC({todolistId: 'todolistId2', id: '2'});
+    const action = deleteTask.fulfilled({todolistId: 'todolistId2', id: '2'}, '', {todolistId: 'todolistId2', taskId: '2'});
     const endState = tasksReducer(startState, action)
     expect(endState['todolistId2'].length).toBe(2);
     expect(endState['todolistId2'][1].id).toBe('3');
 });
 
 test('correct task should be added to correct array', () => {
-    const action = addTaskAC({
-        task: {
-            id: '4', title: 'juice',
-            status: TaskStatuses.New,
-            deadline: '',
-            description: '',
-            priority: TaskPriorities.Low,
-            startDate: '',
-            addedDate: '',
-            order: 0,
-            todoListId: 'todolistId2'
-        }
-    });
+   let task = {
+       id: '4', title: 'juice',
+       status: TaskStatuses.New,
+       deadline: '',
+       description: '',
+       priority: TaskPriorities.Low,
+       startDate: '',
+       addedDate: '',
+       order: 0,
+       todoListId: 'todolistId2'
+   }
+
+    const action = createTask.fulfilled({todoListId:'todolistId2', task}, '', {todolistsId:'todolistId2', title: 'juice'});
     const endState = tasksReducer(startState, action)
     expect(endState['todolistId1'].length).toBe(3);
     expect(endState['todolistId2'].length).toBe(4);

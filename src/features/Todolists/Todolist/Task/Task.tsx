@@ -1,5 +1,5 @@
 import React, {ChangeEvent, memo} from 'react';
-import {deleteTaskTC, TaskDomainType, updateTaskTC} from '../../tasksReducer';
+import {deleteTask, TaskDomainType, updateTaskTC} from '../../tasksReducer';
 import {TaskStatuses} from '../../../../api/todolist-api';
 import {EditableSpan} from '../../../../components/EditableSpan/EditableSpan';
 import Checkbox from '@mui/material/Checkbox';
@@ -15,7 +15,7 @@ type TaskPropsType = {
 
 export const Task = memo(({task, todolistID}: TaskPropsType) => {
     const dispatch = useAppDispatch()
-    const onClickHandler = () => dispatch(deleteTaskTC(todolistID, task.id))
+    const onClickHandler = () => dispatch(deleteTask({todolistId: todolistID, taskId: task.id}))
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New;
         dispatch(updateTaskTC(todolistID, task.id, {status}));

@@ -61,14 +61,9 @@ export const Login = () => {
                     <p>please disable Cross-Origin Restrictions</p>
                     <p>{`Preferences >> Advanced, and select`}</p>
                     <p>'Disable Cross-Origin Restrictions'</p>
-                    <p>To log in get registered
-                        <a href={'https://social-network.samuraijs.com/'}
-                           target={'_blank'} rel="noreferrer"> here
-                        </a>
-                    </p>
-                    <p>or use common test account credentials:</p>
-                    <p>Email: free@samuraijs.com</p>
-                    <p>Password: free</p>
+                    <p>To log in use common test account credentials:</p>
+                    <p><b>Email: </b>free@samuraijs.com</p>
+                    <p><b>Password:</b> free</p>
                 </FormLabel>
                 <form onSubmit={formik.handleSubmit}>
                     <FormGroup>

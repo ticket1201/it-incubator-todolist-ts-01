@@ -1,6 +1,5 @@
 import React, {memo, useCallback} from 'react';
 import {TaskStatuses} from '../../../api/todolist-api';
-import {creteTasksTC} from '../tasksReducer';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleTC,
@@ -15,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Delete from '@material-ui/icons/Delete';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
+import {createTask} from '../tasksReducer';
 
 
 type PropsType = {
@@ -30,7 +30,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
     const tasksPlaceHolder = `No tasks here...`
 
     const addTask = (title: string) => {
-        dispatch((creteTasksTC(id, title)));
+        dispatch(createTask({todolistsId: id, title}));
     }
 
     const removeTodolist = () => {

@@ -1,7 +1,7 @@
 import {resultCodes, todolistAPI, TodolistType} from '../../api/todolist-api';
 import {appActionsType, RequestStatusType, setAppStatusAC} from '../../app/app-reducer';
 import {handleServerAppError, handleServerNetworkError} from '../../components/utils/error-utils';
-import {fetchTasksTC, setTasksAC} from './tasksReducer';
+import {fetchTasks} from './tasksReducer';
 import {RootThunkType} from '../../app/store';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
@@ -70,13 +70,11 @@ export const fetchTodolistsTC = (): RootThunkType => (dispatch) => {
             return res.data
         })
         .then(todolists => {
-            todolists.forEach(todo => dispatch(fetchTasksTC(todo.id)))
-
+            todolists.forEach(todo => dispatch(fetchTasks(todo.id)))
         })
         .catch(e => {
             handleServerNetworkError(e, dispatch)
         })
-        .finally(() => dispatch(setAppStatusAC({status: 'succeeded'})))
 }
 export const addTodolistsTC = (title: string): RootThunkType => (dispatch) => {
     dispatch(setAppStatusAC({status: 'loading'}))
@@ -133,7 +131,6 @@ export type TodolistDomainType = TodolistType & {
 export type setTodolistsActionType = ReturnType<typeof setTodolistsAC>
 export type addTodolistACType = ReturnType<typeof addTodolistAC>
 export type removeTodolistACType = ReturnType<typeof removeTodolistAC>
-export type setTasksACType = ReturnType<typeof setTasksAC>
 export type clearDataACType = ReturnType<typeof clearDataAC>
 
 export type todoACType =
@@ -143,6 +140,5 @@ export type todoACType =
     | ReturnType<typeof changeTodolistTitleAC>
     | ReturnType<typeof changeTodolistFilterAC>
     | ReturnType<typeof changeEntityStatusAC>
-    | setTasksACType
     | clearDataACType
     | appActionsType

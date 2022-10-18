@@ -14,19 +14,13 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 
-
-//export const store = createStore(rootReducer, applyMiddleware(thunk))
 export const store = configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk)
 })
 
 export type RootStateType = ReturnType<typeof store.getState>
-// export type RootDispatchType = typeof store.dispatch
-
-
 export type RootActionsType = todoACType | tasksACType | appActionsType | authActionsType
-
 export type RootDispatchType = ThunkDispatch<RootStateType, unknown, RootActionsType>
 export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, RootActionsType>
 

@@ -2,8 +2,8 @@ import React, {memo, useCallback} from 'react';
 import {TaskStatuses} from '../../../api/todolist-api';
 import {
     changeTodolistFilterAC,
-    changeTodolistTitleTC,
-    deleteTodolistTC,
+    changeTodolistTitle,
+    deleteTodolist,
     TodolistDomainType,
 } from '../todolistReducer';
 import {Task} from './Task/Task';
@@ -34,10 +34,10 @@ export const Todolist = memo(({todolist}: PropsType) => {
     }
 
     const removeTodolist = () => {
-        dispatch(deleteTodolistTC(id));
+        dispatch(deleteTodolist(id));
     }
-    const changeTodolistTitle = useCallback((title: string) => {
-        dispatch(changeTodolistTitleTC(id, title));
+    const changeTodolistTitleHandler = useCallback((title: string) => {
+        dispatch(changeTodolistTitle({id, title}));
     }, [dispatch, id])
 
     const onAllClickHandler = () => dispatch(changeTodolistFilterAC({value: 'all', todolistId: id}));
@@ -56,7 +56,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
     return (
         <Paper elevation={5} className={'Paper'} style={{borderRadius: '10px'}}>
             <h3>
-                <EditableSpan value={title} onChange={changeTodolistTitle} disabled={entityStatus === 'loading'}/>
+                <EditableSpan value={title} onChange={changeTodolistTitleHandler} disabled={entityStatus === 'loading'}/>
                 <IconButton aria-label="delete"
                             onClick={removeTodolist}
                             disabled={entityStatus === 'loading'}
@@ -68,7 +68,7 @@ export const Todolist = memo(({todolist}: PropsType) => {
             <ol>
                 {tasks.length
                     ? tasks.map(t => {
-                        return <Task key={t.id} task={t} todolistID={id}/>
+                        return <Task key={t.id} task={t} todolistId={id}/>
                     })
                     : <span>{tasksPlaceHolder}</span>
                 }

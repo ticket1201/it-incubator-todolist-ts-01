@@ -3,10 +3,9 @@ import './App.css';
 import ButtonAppBar from '../components/ButtonAppBar/ButtonAppBar';
 import Todolists from '../features/Todolists/Todolists';
 import Container from '@mui/material/Container';
-import LinearProgress from '@mui/material/LinearProgress';
 import CircularProgress from '@mui/material/CircularProgress';
 import {CustomizedSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
-import {initAppTC} from './app-reducer';
+import {initApp} from './app-reducer';
 import {Login} from '../features/Login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
@@ -15,11 +14,9 @@ import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 function App() {
     let dispatch = useAppDispatch()
     const isInitialized = useAppSelector(state => state.app.isInitialized)
-    const status = useAppSelector( state => state.app.status)
-
 
     useEffect(()=>{
-        dispatch(initAppTC())
+        dispatch(initApp())
     }, [dispatch])
 
     if (!isInitialized) {
@@ -33,7 +30,7 @@ function App() {
         <div className="App">
             <ButtonAppBar/>
             <CustomizedSnackbar/>
-            {status === 'loading' &&  <LinearProgress color="secondary"/>}
+
             <Container fixed className={'main'}>
                <Routes>
                    <Route path={'/'} element={<Todolists/>}/>

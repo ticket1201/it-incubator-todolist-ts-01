@@ -1,5 +1,5 @@
 import React, {ChangeEvent, memo} from 'react';
-import {deleteTask, TaskDomainType, updateTaskTC} from '../../tasksReducer';
+import {deleteTask, TaskDomainType, updateTask} from '../../tasksReducer';
 import {TaskStatuses} from '../../../../api/todolist-api';
 import {EditableSpan} from '../../../../components/EditableSpan/EditableSpan';
 import Checkbox from '@mui/material/Checkbox';
@@ -9,21 +9,21 @@ import {useAppDispatch} from '../../../../hooks/hooks';
 
 type TaskPropsType = {
     task: TaskDomainType
-    todolistID: string
+    todolistId: string
 }
 
 
-export const Task = memo(({task, todolistID}: TaskPropsType) => {
+export const Task = memo(({task, todolistId}: TaskPropsType) => {
     const dispatch = useAppDispatch()
-    const onClickHandler = () => dispatch(deleteTask({todolistId: todolistID, taskId: task.id}))
+    const onClickHandler = () => dispatch(deleteTask({todolistId, taskId: task.id}))
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New;
-        dispatch(updateTaskTC(todolistID, task.id, {status}));
+        dispatch(updateTask({todolistId, taskId: task.id, model: {status}}));
     }
     const onTitleChangeHandler = (title: string) => {
-        dispatch(updateTaskTC(todolistID, task.id, {title}));
+        dispatch(updateTask({todolistId, taskId: task.id, model: {title}}));
     }
-
 
     return (
         <li className={task.status === TaskStatuses.Completed ? `is-done task` : 'task'}>

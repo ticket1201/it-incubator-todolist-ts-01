@@ -16,7 +16,7 @@ export default {
 const TaskWithRedux = () => {
     const task = useSelector<RootStateType, TaskDomainType>(state => state.tasks['todolistId1'][0])
     return(
-        <Task task={task} todolistID={'todolistId1'}/>
+        <Task task={task} todolistId={'todolistId1'}/>
     )
 }
 

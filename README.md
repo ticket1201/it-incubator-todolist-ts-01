@@ -3,7 +3,8 @@ This project based on React, Redux, React-router-dom v.6, TypeScript, SCSS, Stor
 
 
 ## Application preview
-![image](https://user-images.githubusercontent.com/79248913/196689320-e9e768ac-e52b-4af0-bc6a-62ab9e83d028.png)
+![image](https://user-images.githubusercontent.com/79248913/196689966-c503a64c-422c-4bed-a2b7-5071ae59c60d.png)
+
 
 
 
